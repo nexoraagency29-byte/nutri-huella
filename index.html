@@ -1122,10 +1122,10 @@
       .hero-right img { object-position: center center; }
       .hero-left { padding: 2rem var(--sp-md) 2rem; align-items: flex-start; }
       .hero-scroll { display: none; }
-      .hero-proof { padding: .9rem var(--sp-md); flex-direction: column; gap: .9rem; align-items: flex-start; }
-      .proof-reviews { padding-right: 0; }
+      .hero-proof { padding: .75rem var(--sp-md); flex-direction: row; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between; }
+      .proof-reviews { padding-right: 0; flex: 1 1 auto; }
       .proof-sep { display: none; }
-      .proof-secure, .proof-love { padding-right: 0; }
+      .proof-secure, .proof-love { padding-right: 0; flex: 0 1 auto; }
       .ubicacion .container { grid-template-columns: 1fr; gap: var(--sp-lg); }
       .cta-row { flex-direction: column; align-items: center; }
       footer { flex-direction: column; text-align: center; }
@@ -1146,8 +1146,9 @@
       .stat-item { padding: .5rem 1.25rem; border-right: none; border-bottom: 1px solid var(--border); }
       .stat-item:last-child { border-bottom: none; }
       .hero-btns { flex-direction: column; align-items: flex-start; }
-      .hero-trust { gap: .7rem; }
-      .trust-item { min-width: 52px; }
+      .hero-trust { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
+      .trust-item { min-width: unset; flex-direction: row; justify-content: flex-start; text-align: left; gap: .5rem; }
+      .trust-item span { font-size: .7rem; }
       .pet-tab { padding: .5rem .7rem; font-size: .82rem; }
       .filtro-btn { font-size: .62rem; padding: .35rem .65rem; }
     }
@@ -2178,7 +2179,7 @@
       </div>
       <div class="cat-grid">
         <div class="cat-card">
-          <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=700&q=80&auto=format&fit=crop" alt="Alimentos premium para mascotas" loading="lazy">
+          <img src="productos/royal-canin.jpg" alt="Alimentos premium para mascotas" loading="lazy">
           <div class="cat-card-body">
             <div class="cat-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
@@ -2189,7 +2190,7 @@
           <div class="cat-badge">Premium</div>
         </div>
         <div class="cat-card">
-          <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?w=700&q=80&auto=format&fit=crop" alt="Juguetes para perros y gatos" loading="lazy">
+          <img src="productos/juguete-perro-cuerda-nudo.jpg" alt="Juguetes para perros y gatos" loading="lazy">
           <div class="cat-card-body">
             <div class="cat-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
@@ -2199,7 +2200,7 @@
           </div>
         </div>
         <div class="cat-card">
-          <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=700&q=80&auto=format&fit=crop" alt="Accesorios para mascotas" loading="lazy">
+          <img src="productos/correa-retractil-exlin-5m.jpg" alt="Accesorios para mascotas" loading="lazy">
           <div class="cat-card-body">
             <div class="cat-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
@@ -2209,7 +2210,7 @@
           </div>
         </div>
         <div class="cat-card">
-          <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=700&q=80&auto=format&fit=crop" alt="Higiene y cuidado para mascotas" loading="lazy">
+          <img src="productos/higiene-elmer-cachorros.jpg" alt="Higiene y cuidado para mascotas" loading="lazy">
           <div class="cat-card-body">
             <div class="cat-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
