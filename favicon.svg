@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Fondo naranja circular -->
+  <circle cx="50" cy="50" r="50" fill="#FF8C42"/>
+
+  <!-- Techo de la casa -->
+  <polygon points="50,18 22,42 78,42" fill="white"/>
+
+  <!-- Cuerpo de la casa -->
+  <rect x="28" y="42" width="44" height="32" rx="3" fill="white"/>
+
+  <!-- Cara del perro: hocico -->
+  <ellipse cx="50" cy="62" rx="11" ry="8" fill="#f0d9c8"/>
+
+  <!-- Ojos -->
+  <circle cx="43" cy="55" r="2.5" fill="#1a1a1a"/>
+  <circle cx="57" cy="55" r="2.5" fill="#1a1a1a"/>
+  <!-- Brillo ojos -->
+  <circle cx="44" cy="54" r="0.8" fill="white"/>
+  <circle cx="58" cy="54" r="0.8" fill="white"/>
+
+  <!-- Nariz -->
+  <ellipse cx="50" cy="61" rx="3" ry="2" fill="#1a1a1a"/>
+
+  <!-- Hueso arriba del techo -->
+  <g fill="white">
+    <circle cx="42" cy="13" r="3.5"/>
+    <circle cx="58" cy="13" r="3.5"/>
+    <rect x="42" y="10" width="16" height="6" rx="2"/>
+  </g>
+</svg>
