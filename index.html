@@ -1035,22 +1035,31 @@
       box-shadow: 0 24px 56px rgba(255,107,26,.22), 0 6px 20px rgba(0,0,0,.5);
     }
     .dest-badges {
-      position: absolute; top: .85rem; left: .85rem;
-      display: flex; flex-direction: column; gap: .4rem; z-index: 3;
+      position: absolute; inset: 0;
+      z-index: 3; pointer-events: none;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: .75rem;
     }
     .dest-badge {
-      display: inline-flex; align-items: center; gap: .3rem;
-      padding: .28rem .75rem; border-radius: 100px;
+      display: inline-flex; align-items: center; gap: .35rem;
       font-family: 'Montserrat', sans-serif;
-      font-size: .6rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      font-size: .58rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
       white-space: nowrap;
     }
-    .dest-badge.featured { background: var(--brand); color: #fff; box-shadow: 0 2px 12px rgba(255,107,26,.45); }
+    .dest-badge.featured {
+      align-self: flex-start;
+      padding: .32rem .9rem; border-radius: 100px;
+      background: var(--brand); color: #fff;
+      box-shadow: 0 2px 18px rgba(255,107,26,.65);
+    }
     .dest-badge.gift {
-      background: rgba(0,0,0,.72); color: #fff;
-      border: 1px solid rgba(255,255,255,.2);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      align-self: stretch; justify-content: center;
+      padding: .5rem 1rem; border-radius: .6rem;
+      background: rgba(10,10,10,.72); color: #fff;
+      border: 1px solid rgba(255,107,26,.2);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 -6px 24px rgba(0,0,0,.45);
+      letter-spacing: .12em;
     }
     .dest-img-wrap {
       aspect-ratio: 4/3; overflow: hidden;
