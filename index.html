@@ -6,45 +6,76 @@
   <title>Nutri Huella — Tienda para Mascotas · Chacarita, Buenos Aires</title>
   <meta name="description" content="Nutri Huella, tu tienda de mascotas en Chacarita. Royal Canin, Old Prince, Purina, Fawna y más. Alimentos, juguetes, accesorios e higiene. Pedí por WhatsApp.">
 
-  <!-- ===== META PIXEL — reemplazá XXXXXXXXXXXXXXXXXX con tu ID ===== -->
+  <!-- SEO -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.nutrihuella.shop">
+  <meta name="keywords" content="tienda mascotas chacarita, alimentos perros gatos, royal canin buenos aires, pro plan, old prince, eukanuba, fawna, nutri huella">
+
+  <!-- ===== GOOGLE ANALYTICS 4 — reemplazá G-XXXXXXXXXX con tu Measurement ID ===== -->
+  <!-- Para obtenerlo: analytics.google.com → Crear cuenta → Web → copiá el ID que empieza con G- -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
+  <!-- ===== FIN GOOGLE ANALYTICS ===== -->
+
+  <!-- ===== META PIXEL — reemplazá XXXXXXXXXXXXXXXXXX con tu Pixel ID ===== -->
+  <!-- Para obtenerlo: business.facebook.com → Events Manager → Conectar fuentes → Web -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'XXXXXXXXXXXXXXXXXX'); // ← REEMPLAZÁ CON TU PIXEL ID
+    fbq('init', 'XXXXXXXXXXXXXXXXXX');
     fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
   <!-- ===== FIN META PIXEL ===== -->
 
-  <!-- Open Graph — optimizado para ads Meta -->
+  <!-- Open Graph — preview al compartir en WhatsApp, Instagram, Facebook -->
+  <meta property="og:site_name" content="Nutri Huella">
   <meta property="og:title" content="Nutri Huella — Alimentos Premium para tu Mascota · Chacarita">
-  <meta property="og:description" content="Royal Canin, Old Prince, Purina, Fawna y más. Pedí por WhatsApp y retirá en Chacarita o recibilo en casa.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&h=630&fit=crop&q=85">
+  <meta property="og:description" content="Royal Canin, Old Prince, Pro Plan, Fawna y más. Pedí por WhatsApp y retirá en Chacarita o recibilo en casa.">
+  <meta property="og:image" content="https://www.nutrihuella.shop/hero-collage.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.nutrihuella.shop">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nutri Huella — Alimentos Premium para tu Mascota">
+  <meta name="twitter:description" content="Royal Canin, Old Prince, Pro Plan, Fawna y más. Pedí por WhatsApp y retirá en Chacarita.">
+  <meta name="twitter:image" content="https://www.nutrihuella.shop/hero-collage.jpg">
 
-  <!-- JSON-LD PetStore — Google Rich Results -->
+  <!-- JSON-LD PetStore — Google Rich Results y búsquedas locales -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "PetStore",
     "name": "Nutri Huella",
-    "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800",
+    "description": "Tienda de alimentos y accesorios para mascotas en Chacarita, Buenos Aires. Royal Canin, Old Prince, Pro Plan, Eukanuba, Fawna y más.",
+    "image": "https://www.nutrihuella.shop/hero-collage.jpg",
     "url": "https://www.nutrihuella.shop",
     "telephone": "+5491128639974",
+    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Av. Álvarez Thomas 520",
       "addressLocality": "Chacarita",
-      "addressRegion": "CABA",
+      "addressRegion": "Buenos Aires",
       "postalCode": "C1427",
       "addressCountry": "AR"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-34.5862",
+      "longitude": "-58.4448"
+    },
+    "hasMap": "https://maps.google.com/?q=Av+Alvarez+Thomas+520+Chacarita+Buenos+Aires",
     "openingHoursSpecification": [{
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
@@ -56,8 +87,15 @@
       "opens": "10:00",
       "closes": "17:00"
     }],
-    "servesCuisine": ["Pet Food", "Pet Supplies"],
-    "sameAs": ["https://www.instagram.com/nutri__huella/"]
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+5491128639974",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    },
+    "sameAs": [
+      "https://www.instagram.com/nutri__huella/"
+    ]
   }
   </script>
 
@@ -1267,7 +1305,7 @@
         <span class="line"><span class="word">Tu mascota</span></span>
         <span class="line"><span class="word">merece</span>&nbsp;<span class="word accent">lo mejor.</span></span>
       </h1>
-      <p class="hero-sub">Te ayudamos a elegir el alimento correcto según la raza, la edad y el tamaño de tu compañero. Sin vueltas.</p>
+      <p class="hero-sub">Te ayudamos a elegir el alimento correcto según la raza, la edad y el tamaño de tu compañero.</p>
       <div class="hero-btns">
         <a href="https://wa.me/5491128639974?text=Hola!%20Quiero%20consultar%20un%20producto%20de%20Nutri%20Huella"
            class="btn-primary" target="_blank" rel="noopener"
