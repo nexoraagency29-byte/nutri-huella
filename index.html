@@ -983,6 +983,70 @@
       box-shadow: 0 4px 14px rgba(255,107,26,.4);
       transform: scale(1.07);
     }
+    /* ─── BUSCADOR ─── */
+    .buscador-wrap {
+      display: flex; justify-content: center;
+      margin: var(--sp-lg) 0 0; padding: 0 var(--sp-md);
+    }
+    .buscador { position: relative; width: 100%; max-width: 520px; }
+    .buscador .lupa {
+      position: absolute; left: 1.15rem; top: 50%; transform: translateY(-50%);
+      width: 19px; height: 19px; color: #999; pointer-events: none;
+    }
+    .buscador input {
+      width: 100%; padding: .95rem 3.1rem;
+      border-radius: 100px; border: 2px solid rgba(0,0,0,.10);
+      background: #fff; color: #111;
+      font-family: 'Montserrat', sans-serif; font-size: .95rem; font-weight: 500;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .buscador input::placeholder { color: #999; font-weight: 400; }
+    .buscador input:focus { border-color: var(--brand); box-shadow: 0 4px 20px rgba(255,107,26,.18); }
+    /* la X nativa de type=search duplicaria nuestro boton de limpiar */
+    .buscador input::-webkit-search-cancel-button,
+    .buscador input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+    .buscador-clear {
+      position: absolute; right: .6rem; top: 50%; transform: translateY(-50%);
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 0; background: rgba(0,0,0,.06); color: #555; cursor: pointer;
+      display: none; align-items: center; justify-content: center;
+      transition: background .2s, color .2s;
+    }
+    .buscador-clear.visible { display: flex; }
+    .buscador-clear:hover { background: var(--brand); color: #fff; }
+    .buscador-clear svg { width: 14px; height: 14px; }
+    /* el circulo se ve de 34px pero el area tocable llega a los 44px recomendados */
+    .buscador-clear::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); width: 44px; height: 44px;
+    }
+
+    .buscador-info {
+      display: none; text-align: center;
+      margin: 1rem auto 0; padding: 0 var(--sp-md);
+      font-size: .85rem; color: #666; font-weight: 500;
+    }
+    /* el aire bajo el contador reemplaza al margen de los filtros, que estan ocultos al buscar */
+    .buscador-info.visible { display: block; margin-bottom: var(--sp-lg); }
+    .buscador-info strong { color: #111; }
+
+    .buscador-vacio {
+      display: none; text-align: center;
+      max-width: 460px; margin: var(--sp-lg) auto 0;
+      padding: var(--sp-lg) var(--sp-md);
+      background: #fff; border-radius: 20px;
+      border: 1.5px solid rgba(0,0,0,.08);
+      box-shadow: 0 2px 14px rgba(0,0,0,.06);
+    }
+    .buscador-vacio.visible { display: block; }
+    .buscador-vacio p { color: #555; font-size: .95rem; margin-bottom: 1.1rem; }
+    .buscador-vacio strong { color: #111; }
+
+    /* mientras se busca, los tabs y filtros no aplican: el resultado sale de todo el catalogo */
+    .productos-section.buscando .pet-tabs,
+    .productos-section.buscando .productos-filtros { display: none; }
+
     .productos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
@@ -1546,6 +1610,18 @@
         <h2>Nuestros <em>productos.</em></h2>
         <p class="body-txt" style="color:#666">Hacé click en cualquier producto. Te respondemos con precio y stock al instante.</p>
       </div>
+
+      <!-- Buscador -->
+      <div class="buscador-wrap">
+        <div class="buscador">
+          <svg class="lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+          <input type="search" id="buscador-input" placeholder="Buscar producto o marca…" autocomplete="off" aria-label="Buscar en todo el catálogo">
+          <button type="button" class="buscador-clear" id="buscador-clear" aria-label="Limpiar búsqueda">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="buscador-info" id="buscador-info" role="status" aria-live="polite"></p>
 
       <!-- Tabs principales -->
       <div class="pet-tabs" role="group" aria-label="Categoría de productos">
@@ -2504,6 +2580,12 @@
         </a>
 
       </div><!-- /productos-grid -->
+
+      <!-- Estado vacio del buscador -->
+      <div class="buscador-vacio" id="buscador-vacio">
+        <p>No encontramos nada para <strong id="buscador-vacio-q"></strong>.<br>Igual lo podemos conseguir — escribinos y te decimos.</p>
+        <a class="btn-primary" id="buscador-vacio-wa" href="https://wa.me/5491128639974" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -2736,10 +2818,62 @@
       cuchas:     ['cuchas']
     };
 
+    // ─── Buscador ───
+    // Busca en TODO el catalogo, sin importar el tab: si alguien escribe "urinary"
+    // no tiene por que saber si esta en Perros o en Gatos.
+    let searchTerm = '';
+    // NFD separa la tilde de la letra y ese rango de combinantes la borra:
+    // asi "pañal" encuentra "panal" y "pequeñas" encuentra "pequenas"
+    const sinTildes = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+    const productosSection = document.getElementById('productos');
+    const buscadorInput    = document.getElementById('buscador-input');
+    const buscadorClear    = document.getElementById('buscador-clear');
+    const buscadorInfo     = document.getElementById('buscador-info');
+    const buscadorVacio    = document.getElementById('buscador-vacio');
+    const buscadorVacioQ   = document.getElementById('buscador-vacio-q');
+    const buscadorVacioWa  = document.getElementById('buscador-vacio-wa');
+
+    // el texto buscable de cada tarjeta se calcula una sola vez
+    const textoBuscable = card => card._buscable ??= sinTildes(
+      (card.querySelector('.prod-name')?.textContent || '') + ' ' +
+      (card.dataset.brand || '') + ' ' + (card.dataset.category || '')
+    );
+
+    function actualizarUIBuscador(buscando, encontrados) {
+      productosSection.classList.toggle('buscando', buscando);
+      buscadorInfo.classList.toggle('visible', buscando);
+      buscadorVacio.classList.toggle('visible', buscando && encontrados === 0);
+      if (!buscando) return;
+
+      const q = searchTerm.trim();
+      // se arma con nodos, nunca con innerHTML: lo que escribe el usuario no se interpreta
+      const marca = document.createElement('strong');
+      marca.textContent = '«' + q + '»';
+      buscadorInfo.replaceChildren(
+        encontrados === 0
+          ? 'Sin resultados para '
+          : encontrados + (encontrados === 1 ? ' producto para ' : ' productos para '),
+        marca
+      );
+      buscadorVacioQ.textContent = '«' + q + '»';
+      buscadorVacioWa.href = 'https://wa.me/5491128639974?text=' +
+        encodeURIComponent('Hola Nutri Huella! Estoy buscando: ' + q + ' \u{1F43E}');
+    }
+
     function applyFilters() {
+      const q = sinTildes(searchTerm).trim();
+      const buscando = q.length > 0;
+      const palabras = q.split(/\s+/).filter(Boolean);
+      let encontrados = 0;
+
       document.querySelectorAll('.prod-card').forEach(card => {
         let visible = false;
-        if (activePet === 'perros' || activePet === 'gatos') {
+        if (buscando) {
+          const texto = textoBuscable(card);
+          visible = palabras.every(p => texto.includes(p));
+          if (visible) encontrados++;
+        } else if (activePet === 'perros' || activePet === 'gatos') {
           visible = card.dataset.category === activePet &&
                     (activeBrand === 'all' || card.dataset.brand === activeBrand);
         } else if (TAB_BRANDS[activePet]) {
@@ -2749,7 +2883,12 @@
         }
         card.classList.toggle('hidden', !visible);
       });
+
+      actualizarUIBuscador(buscando, encontrados);
+
       document.querySelectorAll('.sect-divider').forEach(div => {
+        // buscando no hay secciones: los resultados vienen mezclados de todo el catalogo
+        if (buscando) { div.classList.add('hidden'); return; }
         let shouldShow = false;
         if (div.dataset.tab) {
           if (div.dataset.brandGroup) {
@@ -2815,6 +2954,25 @@
         applyFilters();
       });
     });
+
+    // al limpiar se vuelve al tab y filtro que estaban activos antes de buscar
+    function limpiarBusqueda() {
+      buscadorInput.value = '';
+      searchTerm = '';
+      buscadorClear.classList.remove('visible');
+      applyFilters();
+      buscadorInput.focus();
+    }
+
+    buscadorInput.addEventListener('input', () => {
+      searchTerm = buscadorInput.value;
+      buscadorClear.classList.toggle('visible', searchTerm.trim().length > 0);
+      applyFilters();
+    });
+    buscadorInput.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && searchTerm) { e.preventDefault(); limpiarBusqueda(); }
+    });
+    buscadorClear.addEventListener('click', limpiarBusqueda);
 
     applyFilters();
 
